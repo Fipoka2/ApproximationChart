@@ -1,5 +1,7 @@
 package chart;
 
+import chart.Approximation.EulerMethod;
+import chart.Approximation.OriginalFunction;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,30 +24,33 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/hello.fxml"));
-        primaryStage.setTitle("JavaFX Chart (Series)");
+        primaryStage.setTitle("Атландида 2.0");
 
         NumberAxis x = new NumberAxis();
         NumberAxis y = new NumberAxis();
 
         LineChart<Number, Number> numberLineChart = new LineChart<Number, Number>(x,y);
-        numberLineChart.setTitle("Series");
+        numberLineChart.setTitle("Y(x)");
         numberLineChart.setCreateSymbols(false);
         XYChart.Series series1 = new XYChart.Series();
         XYChart.Series series2 = new XYChart.Series();
 
-        series2.setName("cos(x)");
-        series1.setName("sin(x)");
+        series1.setName("Явный метод Эйлера");
+        series2.setName("Базовое уравнение");
+
+        EulerMethod eulerMethod = new EulerMethod();
+        double[] xs = eulerMethod.getArrayOfX();
+        double[] ys = eulerMethod.getApproximationPoints();
 
         ObservableList<XYChart.Data> datas = FXCollections.observableArrayList();
         ObservableList<XYChart.Data> datas2 = FXCollections.observableArrayList();
-        for(int xx=0; xx<10; xx++){
-
-            for (int i=0;i<100;i++){
-
-            Double d = ((double)i) /100;
-            datas.add(new XYChart.Data(xx + d,Math.sin(xx + d)));
-            }
-            datas2.add(new XYChart.Data(xx,Math.sin(xx)));
+        for(int i=0; i<xs.length; i++){
+            datas.add(new XYChart.Data(xs[i],ys[i]));
+        }
+        for(int i = 0; i< OriginalFunction.length;i++)
+        {
+            double[][] xz = OriginalFunction.getArray();
+            datas2.add(new XYChart.Data(xz[i][0],xz[i][1]));
         }
 
         series1.setData(datas);
