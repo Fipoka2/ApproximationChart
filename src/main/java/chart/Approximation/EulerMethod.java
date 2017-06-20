@@ -7,8 +7,8 @@ public class EulerMethod
 {
     public EulerMethod()
     {
-        startPoint = 0.0;
-        endPoint = 1.0;
+        startPoint = 1.0;
+        endPoint = 2.0;
         length = (int) (1/h+1);
         h = 0.1;
 
@@ -33,38 +33,53 @@ public class EulerMethod
     }
 
     //hardcoded Function
-    public static double func(double x, double y)
+    public static double funcY(double z)
     {
-        return x * x - 2 * y;
+        return z;
+    }
+
+    public static double funcZ(double z,double y,double x)
+    {
+        return z*z/y + z/x;
     }
 
     //шаг
-    private double iteration(double xi, double yi)
+    private double iterationY(double zi, double yi)
     {
-        return yi + h * func(xi, yi);
+        return yi + h * funcY(zi);
     }
 
-    public double[] getApproximationPoints()
+    private double iterationZ(double zi, double yi, double xi)
     {
-        double[] array = new double[length+1];
-        array[0] = 1;
-        for(int i=1;i<length;i++)
+        return zi + h * funcZ(zi,yi, xi);
+    }
+
+    public double[][] getApproximationPointsY()
+    {
+        double[][] array = new double[length + 1][3];
+        array[0][0] = Math.E;
+        array[0][1] = 2*Math.E;
+        array[0][2] = startPoint;
+        for (int i = 1; i <length; i++)
         {
-            array[i] = iteration(startPoint + i*h,array[i-1]);
+            array[i][0] = iterationY(array[i - 1][1], array[i - 1][0]);
+            array[i][1] = iterationZ(array[i-1][1],array[i-1][0],startPoint + i*h);
+            array[i][2] = startPoint + i*h;
+
         }
 
         return  array;
     }
 
-    public double[] getArrayOfX()
-    {
-        double[] array = new double[length];
-        for(int i=0;i<length;i++)
-        {
-            array[i] = startPoint + i*h;
-        }
-        return array;
-    }
+//    public double[] getArrayOfX()
+//    {
+//        double[] array = new double[length];
+//        for(int i=0;i<length;i++)
+//        {
+//            array[i] = startPoint + i*h;
+//        }
+//        return array;
+//    }
 
 
 }

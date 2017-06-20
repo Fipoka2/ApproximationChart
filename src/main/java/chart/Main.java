@@ -39,13 +39,13 @@ public class Main extends Application {
         series2.setName("Базовое уравнение");
 
         EulerMethod eulerMethod = new EulerMethod();
-        double[] xs = eulerMethod.getArrayOfX();
-        double[] ys = eulerMethod.getApproximationPoints();
+        double[][] xs = eulerMethod.getApproximationPointsY();
+
 
         ObservableList<XYChart.Data> datas = FXCollections.observableArrayList();
         ObservableList<XYChart.Data> datas2 = FXCollections.observableArrayList();
         for(int i=0; i<xs.length; i++){
-            datas.add(new XYChart.Data(xs[i],ys[i]));
+            datas.add(new XYChart.Data(xs[i][2],xs[i][0]));
         }
         for(int i = 0; i< OriginalFunction.length;i++)
         {
@@ -59,7 +59,7 @@ public class Main extends Application {
 
         Scene scene = new Scene(numberLineChart, 600,600);
         numberLineChart.getData().add(series1);
-        numberLineChart.getData().add(series2);
+        //numberLineChart.getData().add(series2);
         primaryStage.setScene(scene);
 
         primaryStage.show();
