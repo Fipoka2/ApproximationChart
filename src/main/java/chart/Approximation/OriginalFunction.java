@@ -17,18 +17,18 @@ public class OriginalFunction
         originalEnd = 2.0;
     }
 
-////    public static double[][] getArray()
-////    {
-//        double[][] array = new double[length][2];
-////        for (int i=0;i<=length;i++)
-////        {
-////            double x = originalStart + (double) i/length;
-////            array[i][0] = x;
-////            array[i][1] = getY(x);
-//        }
-//        return  array;
-//
-//    }
+    public static double[][] getArray()
+    {
+        double[][] array = new double[length][2];
+        for (int i=0;i<length;i++)
+        {
+            double x = originalStart + (double) i*h;
+            array[i][0] = x;
+            array[i][1] = getY(x);
+        }
+        return  array;
+
+    }
 
     public static double[][] getArrayZ()
     {

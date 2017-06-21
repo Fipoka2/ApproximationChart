@@ -9,7 +9,7 @@ public class EulerMethod
     {
         startPoint = 1.0;
         endPoint = 2.0;
-        h = 0.01;
+        h = 0.1;
         length = (int) (1/h+1);
 
 
@@ -71,16 +71,6 @@ public class EulerMethod
 
         return  array;
     }
-
-//    public double[] getArrayOfX()
-//    {
-//        double[] array = new double[length];
-//        for(int i=0;i<length;i++)
-//        {
-//            array[i] = startPoint + i*h;
-//        }
-//        return array;
-//    }
 
 
 }
