@@ -5,23 +5,39 @@ package chart.Approximation;
  */
 public class OriginalFunction
 {
-    public static int length = 1000;
     public static double originalStart;
     public static double originalEnd;
+    private static double h;
+    public static int length;
 
     static {
-        originalStart = 0.0;
-        originalEnd = 1.0;
+        h = 0.001;
+        length = (int) (1/h+1);
+        originalStart = 1.0;
+        originalEnd = 2.0;
     }
 
-    public static double[][] getArray()
+////    public static double[][] getArray()
+////    {
+//        double[][] array = new double[length][2];
+////        for (int i=0;i<=length;i++)
+////        {
+////            double x = originalStart + (double) i/length;
+////            array[i][0] = x;
+////            array[i][1] = getY(x);
+//        }
+//        return  array;
+//
+//    }
+
+    public static double[][] getArrayZ()
     {
         double[][] array = new double[length][2];
         for (int i=0;i<length;i++)
         {
-            double x = (originalEnd - originalStart)/length * i;
+            double x = originalStart + (double) i*h;
             array[i][0] = x;
-            array[i][1] = getY(x);
+            array[i][1] = getZ(x);
         }
         return  array;
 
@@ -29,6 +45,13 @@ public class OriginalFunction
 
     public static double getY(double x)
     {
-        return  (0.75 * Math.pow(Math.E,-2*x) + 0.5 *x*x - 0.5 * x + 0.25);
+        return  Math.pow(Math.E,x*x);
     }
+
+    public static double getZ(double x)
+    {
+        return  x * 2 * Math.pow(Math.E,Math.pow(x,2));
+    }
+
+
 }

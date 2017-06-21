@@ -9,8 +9,9 @@ public class EulerMethod
     {
         startPoint = 1.0;
         endPoint = 2.0;
+        h = 0.01;
         length = (int) (1/h+1);
-        h = 0.1;
+
 
     }
 
@@ -56,7 +57,7 @@ public class EulerMethod
 
     public double[][] getApproximationPointsY()
     {
-        double[][] array = new double[length + 1][3];
+        double[][] array = new double[length][3];
         array[0][0] = Math.E;
         array[0][1] = 2*Math.E;
         array[0][2] = startPoint;

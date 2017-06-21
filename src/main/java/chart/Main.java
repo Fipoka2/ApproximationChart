@@ -45,11 +45,11 @@ public class Main extends Application {
         ObservableList<XYChart.Data> datas = FXCollections.observableArrayList();
         ObservableList<XYChart.Data> datas2 = FXCollections.observableArrayList();
         for(int i=0; i<xs.length; i++){
-            datas.add(new XYChart.Data(xs[i][2],xs[i][0]));
+            datas.add(new XYChart.Data(xs[i][2],xs[i][1]));
         }
         for(int i = 0; i< OriginalFunction.length;i++)
         {
-            double[][] xz = OriginalFunction.getArray();
+            double[][] xz = OriginalFunction.getArrayZ();
             datas2.add(new XYChart.Data(xz[i][0],xz[i][1]));
         }
 
@@ -59,7 +59,7 @@ public class Main extends Application {
 
         Scene scene = new Scene(numberLineChart, 600,600);
         numberLineChart.getData().add(series1);
-        //numberLineChart.getData().add(series2);
+        numberLineChart.getData().add(series2);
         primaryStage.setScene(scene);
 
         primaryStage.show();
